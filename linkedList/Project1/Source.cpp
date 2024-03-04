@@ -47,16 +47,40 @@ public:
 		}
 		cout << endl;
 	}
+	// remove element at index
+	void remove(int index) {
+		if (head == nullptr) {
+			return;
+		}
+		Node *temp = head;
+		if (index == 0)
+		{
+			head = temp->next;
+			delete temp;
+			return;
+		}
+		for (int i = 0; temp != nullptr && i < index - 1; i++) {
+			temp = temp->next;
+		}
+		if (temp == nullptr || temp->next == nullptr) {
+			return;
+		}
+		Node* next_node = temp->next->next;
+		delete temp->next;
+		temp->next = next_node;
+	}
 };
 
 
 int main()
 {
 	linkedList myList;
-	myList.append(10);
-	myList.append(10);
-	myList.append(10);
-	myList.append(10);
+
+	for (int i = 0; i < 11; i++)
+	{
+		myList.append(i);
+	};
+	myList.remove(2);
 	myList.printList();
 
 
